@@ -12,7 +12,7 @@ Garuda is a healthcare assistant chatbot that provides information and guidance 
 
 ## Demo
 
-[Insert Demo Link here]
+(https://garuda--your-own-healthcare-assistant.glitch.me/)
 
 ## Technologies Used
 
