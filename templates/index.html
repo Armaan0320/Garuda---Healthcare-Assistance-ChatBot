@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Garuda - Your Own Healthcare Assistant</title>
+    <style>
+        body {
+    background-image: url('/static/bg8.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+
+        .chat-container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .chat-box {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 500px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            background-color: #f8f8f8;
+        }
+        
+        .chat-box h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 0;
+        }
+        
+        .chat-box .message-container {
+            margin-bottom: 20px;
+        }
+        
+        .chat-box .message {
+            margin-bottom: 10px;
+        }
+        
+        .chat-box .message.system {
+            color: #888;
+        }
+        
+        .chat-box .message.user {
+            color: #00f;
+        }
+        
+        .chat-box .message.bot {
+            color: #f00;
+        }
+        
+        .chat-box .reply-form {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .chat-box .reply-form input[type="text"],
+        .chat-box .reply-form input[type="submit"] {
+            padding: 5px 10px;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+        
+        .chat-box .reply-form input[type="submit"] {
+            margin-left: 10px;
+            background-color: #00f;
+            color: #fff;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-box">
+            {% if reply %}
+                <div class="message-container">
+                    <h3>Garuda:</h3>
+                    <p>{{ reply }}</p>
+                </div>
+                {% if audio_file %}
+                    <div class="message-container">
+                        <h3>Audio Reply:</h3>
+                        <audio controls>
+                            <source src="data:audio/mpeg;base64,{{ audio_file }}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                {% endif %}
+            {% else %}
+                <h1>Garuda - Your Own Healthcare Assistant</h1>
+                <form action="/" method="POST">
+                    <div class="message-container">
+                        <label for="condition">Health Condition:</label>
+                        <select name="condition" id="condition">
+                            {% for condition in conditions %}
+                                <option value="{{ condition }}">{{ condition }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="message-container">
+                        <label for="severity">Severity:</label>
+                        <select name="severity" id="severity">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    
+                    <div class="reply-form">
+                        <input type="submit" value="Start Chat">
+                    </div>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
